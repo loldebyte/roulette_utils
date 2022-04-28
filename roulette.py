@@ -12,10 +12,16 @@ def roll() -> int:
     return random.randint(0, 36)
 
 def roll_n_times(n: int) -> int:
+    """Simulates n consecutive roulette rolls and returns the number of unique rolled numbers"""
     rolled_numbers = set([roll() for _ in range(n)])
     return len(rolled_numbers)
 
-def roll_until_x_remain(x: int):
+def get_unrolled_from_n_rolls(n: int) -> int:
+    """Simulates n consecutive roulette rolls and returns the number of unique unrolled numbers"""
+    rolled_numbers = set([roll() for _ in range(n)])
+    return len({_ for _ in range(37)} - rolled_numbers)
+
+def roll_until_x_remain(x: int) -> int:
     rolled = set()
     number_of_rolls = 0
     while len(rolled)+x < 37:
@@ -31,4 +37,3 @@ def roll_until_full_set() -> int:
         rolled.add(roll())
         number_of_rolls += 1
     return number_of_rolls
-

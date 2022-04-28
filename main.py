@@ -24,7 +24,7 @@ def get_args():
                         " - 'until' to count average # of rolls to have n "
                         "remaining unrolled numbers.\n"
                         " - 'roll_percent' to count %% of series of n rolls"
-                        "that have k or more unrolled numbers\nDefaults to 'roll'.\n",
+                        "that have u or more unrolled numbers\nDefaults to 'roll'.\n",
                         default="roll")
     parser.add_argument("-p", "--precision", help="How many rolls to simulate.",
                         type=int, default=100000)
@@ -41,15 +41,15 @@ def main():
     mode, n, p, unrolled = get_args()
     if mode == "roll" and unrolled is None:
         vals = [roulette.roll_n_times(n) for _ in range(p)]
-        print(f"Mean number of unique numbers rolled in a series of {n} rolls:\n"
-              f"{statistics.mean(vals)}")
+        print(f"Median number of unique numbers rolled in a series of {n} rolls:\n"
+              f"{statistics.median(vals)}")
     elif mode == "until" and n <= 37 and n > 0 and unrolled is None:
         vals = [roulette.roll_until_x_remain(n) for _ in range(p)]
-        print(f"Mean number of rolls to get {n} remaning unrolled numbers : "
-              f"{statistics.mean(vals)}")
-    elif mode == "roll_percent" and unrolled <= 37 and unrolled > 0:
-        vals = [roulette.roll_n_times(n) for _ in range(p)]
-        n_successful = len(list(filter(lambda x: x+unrolled <= 37, vals)))
+        print(f"Median number of rolls to get {n} remaining unrolled numbers : "
+              f"{statistics.median(vals)}")
+    elif mode == "roll_percent" and unrolled < 37 and unrolled > 0:
+        vals = [roulette.get_unrolled_from_n_rolls(n) for _ in range(p)]
+        n_successful = len(list(filter(lambda x: x >= unrolled, vals)))
         print(f"% series where {unrolled} numbers never rolled (series of "
               f"{n} rolls) : {n_successful/p*100} ; avg out of {p} series")
     else:
