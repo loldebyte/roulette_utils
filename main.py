@@ -53,7 +53,8 @@ def main():
         print(f"% series where {unrolled} numbers never rolled (series of "
               f"{n} rolls) : {n_successful/p*100} ; avg out of {p} series")
     else:
-        raise ValueError(f"mode {mode} not recognized, use '-h' to see usage.")
+        raise ValueError(f"mode {mode} not recognized or used with invalid "
+                         "arguments, use '-h' to see usage.")
 
 if __name__ == "__main__":
     main()
