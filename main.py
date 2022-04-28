@@ -18,7 +18,7 @@ def get_args():
                         help="In mode 'roll', the number of rolls to do.\n"
                         "In mode 'until', the number of remaining unrolled numbers to aim for.",
                         required=True, type=int)
-    parser.add_argument("-m", "--mode", help="what kind of simulation should be run, "
+    parser.add_argument("-m", "--mode", help="What kind of simulation should be run, "
                         "supported are :\n"
                         " - 'roll' to count average # of unrolled numbers after n rolls\n"
                         " - 'until' to count average # of rolls to have n "
