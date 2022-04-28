@@ -7,6 +7,9 @@ name = "pypi"
 cython = "*"
 
 [dev-packages]
+pytest = "*"
+pytest-cov = "*"
+pytest-html = "*"
 
 [requires]
 python_version = "3.8"
